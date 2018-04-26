@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" /> <title>Tarea Siete</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class Country extends React.Component {
+       constructor(props) {
+        super(props);
+        this.state = {
+          name: null,
+        };
+      }
+      render() {
+        return (
+          <td className="">
+            {this.state.name}
+          </td>
+        );
+      }
+    }
+    class Subregion extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+            name: null,
+            countries: Array().fill(null),
+        };
+      }
+      renderCountry(i) {
+        return (<div>
+            <h2>{this.state.name}</h2>
+            <table>
+                <ul>
+                    <Country value={this.state.countries[i]} />
+                </ul>
+            </table>
+            </div>);
+      }
+      class Region extends React.Component {
+      constructor(props) {
+            super(props);
+            this.state = {
+                name: null,
+                subregions: Array().fill(null),
+            };
+          }
+          renderSubregion(i) {
+            return (<div>
+                <h2>{this.state.name}</h2>
+                <Subregion value={this.state.subregions[i]} />
+                </div>);
+      }
+    </script>
+  </body>
+</html>
