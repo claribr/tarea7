@@ -5,59 +5,32 @@
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
+    <script type="text/javascript" src="all.json"></script>
+    
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
-
-    class Country extends React.Component {
-       constructor(props) {
-        super(props);
-        this.state = {
-          name: null,
-        };
-      }
-      render() {
-        return (
-          <td className="">
-            {this.state.name}
-          </td>
-        );
-      }
-    }
-    class Subregion extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-            name: null,
-            countries: Array().fill(null),
-        };
-      }
-      renderCountry(i) {
-        return (<div>
-            <h2>{this.state.name}</h2>
-            <table>
-                <ul>
-                    <Country value={this.state.countries[i]} />
-                </ul>
-            </table>
-            </div>);
-      }
+    var dataLocal = data;
       class Region extends React.Component {
       constructor(props) {
             super(props);
             this.state = {
-                name: null,
-                subregions: Array().fill(null),
+                data:dataLocal
             };
           }
-          renderSubregion(i) {
+   
+          render() {
+              const region = [...new Set(this.state.data.map(all => all.region))];
+              const subRegion = [...new Set(this.state.data.map(all => all.subRegion))];
+              console.log(region);
+              console.log(subRegion);
+              
             return (<div>
-                <h2>{this.state.name}</h2>
-                <Subregion value={this.state.subregions[i]} />
+                    "Haga una variable arriba que devuela los tags que necesita con los datos listos"
                 </div>);
+          }   
       }
-	  const paises = JSON.parse("all.json");
 	  ReactDOM.render(<Region/>,
       document.getElementById('root'));
     </script>
