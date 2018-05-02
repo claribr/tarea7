@@ -12,6 +12,8 @@
     <div id="root"></div>
     <script type="text/babel">
     var dataLocal = data;
+
+
       class Region extends React.Component {
       constructor(props) {
             super(props);
@@ -23,12 +25,16 @@
           render() {
               const region = [...new Set(this.state.data.map(all => all.region))];
               const subRegion = [...new Set(this.state.data.map(all => all.subRegion))];
+              var result =  [...new Set(this.state.data.map(all => all.region.concat(all.subRegion) ))];
+              console.log(result);
               console.log(region);
               console.log(subRegion);
-              
-            return (<div>
-                    "Haga una variable arriba que devuela los tags que necesita con los datos listos"
-                </div>);
+              console.log(this.state.data);
+              return (
+                <div>
+                  {region.map(regiones => <div><h1>{regiones}</h1>{subRegion.map(subregion => <div><h2>{subregion}</h2><div>{this.state.data.map(paises => <p>{subregion == paises.subRegion? paises.name: ""}</p>)}</div></div>)}</div>)}
+                </div>
+                );
           }   
       }
 	  ReactDOM.render(<Region/>,
