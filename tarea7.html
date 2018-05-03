@@ -23,17 +23,31 @@
           }
    
           render() {
+            Array.prototype.unique=function(a){
+              return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+            });
               const region = [...new Set(this.state.data.map(all => all.region))];
               const subRegion = [...new Set(this.state.data.map(all => all.subRegion))];
-              var result =  [...new Set(this.state.data.map(all => all.region.concat(all.subRegion) ))];
-              console.log(result);
-              console.log(region);
-              console.log(subRegion);
-              console.log(this.state.data);
+              var state = [];
+              var prueba = region.forEach(function(v,i){
+                  var subregions = [];
+                  dataLocal.forEach( function(valor, indice) {
+                    if(valor.region == v){
+                      subregions.push(valor.subRegion); 
+                    }
+                  
+                  })
+                  subregions = subregions.unique();
+                  var obj = {
+                    'name': v,
+                    'subregiones': subregions
+                  };
+                  state.push(obj);
+              });
+              var nuevo = state.forEach(function(value, index){ console.log(value.subregiones[index])});
               return (
                 <div>
-                  {region.map(regiones => <div><h1>{regiones}</h1>{subRegion.map(subregion => <div><h2>{subregion}</h2><div>{this.state.data.map(paises => <p>{subregion == paises.subRegion? paises.name: ""}</p>)}</div></div>)}</div>)}
-                </div>
+                  {region.map(regiones => <div><h1>{regiones}</h1>{state.map(subregion => subregion.name == regiones? (<div>{subregion.subregiones.map(value => <h2>{value}</h2>{this.state.data(country => country.subRegion == value? (<p>{country.name}</p>): "")})}</div>): "" )}</div>)}</div>
                 );
           }   
       }
